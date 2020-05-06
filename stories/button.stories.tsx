@@ -17,10 +17,6 @@ const buttonPropsDefault: Button.IProps = {
   onClick: action('clicked'),
 };
 
-const sizeGenerator = size => (size as unknown as Function)('btn');
-const colorGenerator = color => (color as unknown as Function)('btn');
-
-
 storiesOf('Button', module)
   .add('size variants', () => <Button.Component
     {...buttonPropsDefault}>Hello Button</Button.Component>)
