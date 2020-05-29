@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { Button } from '../src';
@@ -17,7 +16,35 @@ const buttonPropsDefault: Button.IProps = {
   onClick: action('clicked'),
 };
 
-storiesOf('Button', module)
-  .add('size variants', () => <Button.Component
-    {...buttonPropsDefault}>Hello Button</Button.Component>)
-  .add('with some emoji', () => <Button.Component {...buttonPropsDefault}>😀 😎 👍 💯</Button.Component>);
+export default {
+  title: 'Button',
+}
+
+export const Sizes = () => (<>
+  <h1>
+    Button sizes
+  </h1>
+  <p>
+    tiny, small, medium, large, huge
+  </p>
+  <Button.Component
+    size={(Behaviours.ComponentSize.Tiny as unknown as Function)('btn')}
+    {...buttonPropsDefault}
+  />
+  <Button.Component
+    size={(Behaviours.ComponentSize.Small as unknown as Function)('btn')}
+    {...buttonPropsDefault}
+  />
+  <Button.Component
+    size={(Behaviours.ComponentSize.Medium as unknown as Function)('btn')}
+    {...buttonPropsDefault}
+  />
+  <Button.Component
+    size={(Behaviours.ComponentSize.Large as unknown as Function)('btn')}
+    {...buttonPropsDefault}
+  />
+  <Button.Component
+    size={(Behaviours.ComponentSize.Huge as unknown as Function)('btn')}
+    {...buttonPropsDefault}
+  />
+</>);
