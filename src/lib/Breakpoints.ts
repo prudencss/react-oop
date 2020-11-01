@@ -1,46 +1,101 @@
-export const defaultBreakpoints = {
-  xs: 480,
-  s: 750,
-  m: 960,
-  l: 1024,
-  xl: 1600,
-  xxl: 1920,
+import { isMobile, isMobileOnly, isTablet } from 'mobile-device-detect';
+
+export enum EDeviceType {
+  Mobile = 'mobile',
+  Tablet  = 'tablet',
+  Desktop = 'desktop',
+}
+
+export enum EOrientation {
+  Portrait = 'portrait',
+  Landscape = 'landscape',
+}
+
+export enum EDeviceSize {
+  Small = 'small',
+  Medium = 'medium',
+  Large = 'large',
+}
+
+export const breakpoints = {
+  [EOrientation.Portrait]: {
+    [EDeviceType.Mobile]: {
+      [EDeviceSize.Small]: 360,
+      [EDeviceSize.Medium]: 480,
+      [EDeviceSize.Large]: 600,
+    },
+    [EDeviceType.Tablet]: {
+      [EDeviceSize.Small]: 720,
+      [EDeviceSize.Medium]: 840,
+      [EDeviceSize.Large]: 960,
+    },
+    [EDeviceType.Desktop]: {
+      [EDeviceSize.Small]: 768,
+      [EDeviceSize.Medium]: 1024,
+      [EDeviceSize.Large]: 1280,
+    },
+  },
+  [EOrientation.Landscape]: {
+    [EDeviceType.Mobile]: {
+      [EDeviceSize.Small]: 480,
+      [EDeviceSize.Medium]: 600,
+      [EDeviceSize.Large]: 960,
+    },
+    [EDeviceType.Tablet]: {
+      [EDeviceSize.Small]: 960,
+      [EDeviceSize.Medium]: 1280,
+      [EDeviceSize.Large]: 1440,
+    },
+    [EDeviceType.Desktop]: {
+      [EDeviceSize.Small]: 1440,
+      [EDeviceSize.Medium]: 1600,
+      [EDeviceSize.Large]: 1920,
+    }
+  }
 };
 
-export type orientation = 'portrait' | 'landscape';
-
-export interface orientations {
-  portrait: 'portrait';
-  landscape: 'landscape';
+export function getOrientation(): EOrientation {
+  return (isLandscape())
+    ? EOrientation.Landscape
+    : EOrientation.Portrait;
 }
 
 export function isLandscape(): boolean {
-  return (window.matchMedia('(orientation: landscape)').matches && window.matchMedia(`(min-width: ${defaultBreakpoints.l}px)`).matches)
-    || (window.matchMedia('(orientation: portrait)').matches && window.matchMedia(`(min-width: ${defaultBreakpoints.l}px)`).matches);
+  return window.matchMedia('(orientation: landscape)').matches;
 }
 
 export function isPortrait(): boolean {
-  return window.matchMedia(`(max-width: ${defaultBreakpoints.l - 1}px)`).matches;
+  return window.matchMedia('(orientation: portrait)').matches;
 }
 
-export function getOrientation(): orientation {
-  return (isLandscape())
-    ? 'landscape'
-    : 'portrait'
+export function isSmall(device: EDeviceType): boolean {
+  const orientation: EOrientation = (isLandscape()) ? EOrientation.Landscape : EOrientation.Portrait;
+
+  return (window.matchMedia(`(max-width: ${breakpoints[orientation][device][EDeviceSize.Small]})`).matches)
 }
 
-export function isSmall(): boolean {
-  return window.matchMedia('(orientation:landscape)').matches && window.matchMedia(`(min-width: ${defaultBreakpoints.l}px)`).matches;
+export function isMedium(device: EDeviceType): boolean {
+  const orientation: EOrientation = (isLandscape()) ? EOrientation.Landscape : EOrientation.Portrait;
+
+  return (window.matchMedia(`(max-width: ${breakpoints[orientation][device][EDeviceSize.Medium]})`).matches)
 }
 
-export function isMedium(): boolean {
-  return window.matchMedia('(orientation:landscape)').matches && window.matchMedia(`(min-width: ${defaultBreakpoints.xl}px)`).matches;
+export function isLarge(device: EDeviceType): boolean {
+  const orientation: EOrientation = (isLandscape()) ? EOrientation.Landscape : EOrientation.Portrait;
+
+  return (window.matchMedia(`(max-width: ${breakpoints[orientation][device][EDeviceSize.Large]})`).matches)
 }
 
-export function isLarge(): boolean {
-  return window.matchMedia('(orientation:landscape)').matches && window.matchMedia(`(min-width: ${defaultBreakpoints.xxl}px)`).matches;
+export function isHuge(device: EDeviceType): boolean {
+  const orientation: EOrientation = (isLandscape()) ? EOrientation.Landscape : EOrientation.Portrait;
+
+  return (window.matchMedia(`(min-width: ${breakpoints[orientation][device][EDeviceSize.Large] + 1})`).matches)
 }
 
-export function isBroad(): boolean {
-  return window.matchMedia('(orientation:landscape)').matches && window.matchMedia(`(min-width: ${defaultBreakpoints.xxl + 1}px)`).matches;
+export function getDeviceType(): EDeviceType {
+  return isMobileOnly
+    ? EDeviceType.Mobile
+    : isTablet
+      ? EDeviceType.Tablet
+      : EDeviceType.Desktop;
 }
