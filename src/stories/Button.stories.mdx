@@ -1,0 +1,54 @@
+import { Meta, Canvas, Story } from '@storybook/addon-docs/blocks';
+import {
+  ButtonVariation,
+  SizeVariations,
+  ColorVariations,
+  DecorationVariations,
+  AnimationVariations,
+  DisabledVariations,
+  TypeVariations
+} from './ButtonVariation';
+
+<Meta title="Component Variations/Button" component={ButtonVariation} />
+
+<style>{`
+  .someClass {
+    property: value;
+  }
+`}</style>
+
+# Button-Component
+<br/>
+
+### Variations in
+  * size
+  * theme (color)
+  * click UI/UX (animation)
+  * drop-shadow (decoration)
+  * disabled
+  * html button type (type)
+  * themed (grouped) styles (buttonType)
+  * circular (fab)
+
+Note that there is a pure-scss version of this component (as I guess there'll be in most cases) in the [scss-version of prudencss](https://github.com/prudencss/scss/blob/master/src/components/_components__button.scss).
+
+<Canvas>
+  <Story name="sizes">
+    <SizeVariations {...SizeVariations.args} />
+  </Story>
+  <Story name="color-themes">
+    <ColorVariations {...ColorVariations.args} />
+  </Story>
+  <Story name="decoration-themes">
+    <DecorationVariations {...DecorationVariations.args} />
+  </Story>
+  <Story name="click-animations">
+    <AnimationVariations {...AnimationVariations.args} />
+  </Story>
+  <Story name="disabled-UI/UX">
+    <DisabledVariations {...DisabledVariations.args} />
+  </Story>
+  <Story name="styled themes">
+    <TypeVariations {...TypeVariations.args} />
+  </Story>
+</Canvas>

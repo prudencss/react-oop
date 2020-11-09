@@ -1,0 +1,26 @@
+import { Meta, Canvas, Story } from '@storybook/addon-docs/blocks';
+
+<Meta title="About Prudencss/Prologue" />
+
+<style>{`
+  .someClass {
+    property: value;
+  }
+`}</style>
+
+# Welcome to Prudencss
+<br/>
+
+### Base CSS Framework, Structure and where the React-specific components fit in
+
+[Prudencss](https://github.com/prudencss/scss) as of its base scss repository and stylesheet-induced functionality has a specific structure as of it's project skeleton. This structure allows for _minimum redundancy_ as of _css-specificity_ (minimum class-name overlaps/style-clashes).
+
+The [React-Components](https://github.com/prudencss/react-oop) - which are/should be availabled in [_OOP_](https://github.com/prudencss/react-oop) as well as in [_Functional_](https://github.com/prudencss/react-fp) style - are there for you in order to group and pre-summarize the necessary CSS classes for you. They also add React-specific sugar on top as well as they might add logic where useful.  That said it should become clear that Prudencss is not a closed system as of its way to deal with stylesheets/styles.
+
+One can and must include the _SCSS_ package, it's a base dependency.
+On top of that
+  * you can just use the CSS classes in your project or even add your own
+  * you can add a framework specific Library on top like prudencss/react-oop and use the ready-made _components_ straight away.
+
+However, using this approach, it's easy to theme and customize your stylings in a lot of ways. There even is a readymade settings-template scss-file available at your fingertips (root of scss package). You should actually use and customize that file, at the very least as of _colors_ and _fonts_.
+
