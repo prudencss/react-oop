@@ -35,19 +35,11 @@ const args = {
   children: 'Click me!'
 };
 
-export const ConfigurableExample: Story<PropsWithChildren<ButtonProps>> = args => (<>
+export const Configurable: Story<PropsWithChildren<ButtonProps>> = args => (<>
    <header><h3>Use Storybook Controls to configure</h3></header>
   <Button {...args} />
 </>);
-ConfigurableExample.args = {
-  ...args,
-};
-
-export const ConfigurableFabExample: Story<PropsWithChildren<ButtonProps>> = args => (<>
-   <header><h3>Use Storybook Controls to configure</h3></header>
-  <Button {...args} fab={true}/>
-</>);
-ConfigurableFabExample.args = {
+Configurable.args = {
   ...args,
 };
 

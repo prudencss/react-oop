@@ -64,7 +64,17 @@ export interface IProps extends IBehaviorProps {
   onBlur?: (ev: React.SyntheticEvent<HTMLButtonElement>) => void;
 }
 
-export class Component extends React.Component<IProps, {}> {
+interface IState {
+  active: boolean,
+  animating: boolean,
+}
+
+export class Component extends React.Component<IProps, IState> {
+  state = {
+    active: false,
+    animating: false,
+  };
+
   render(): React.ReactNode {
     const {
       onClick,
@@ -79,15 +89,20 @@ export class Component extends React.Component<IProps, {}> {
       moduleSpecificClassList,
       type
     } = this.props;
+    const { animating } = this.state;
+
     const _disabled: string = disabled ? EDisabled.Pointer : '';
     const classList = classNames(
       animation,
-      { 'c-btn--fab': fab ?? false },
+      {
+        'c-btn--fab': fab ?? false,
+        'in': animating,
+      },
       color ? componentColor('btn')(color) : null,
       decoration,
       size ? componentSize('btn')(size) : null,
       buttonType,
-      _disabled
+      _disabled,
     );
     const optionalDisabledProps = disabled ? { disabled: true, "aria-disabled": true } : {};
 
@@ -101,8 +116,10 @@ export class Component extends React.Component<IProps, {}> {
           ${(moduleSpecificClassList || []).join(' ')}
         `}
         {...optionalDisabledProps}
-        onClick={onClick}
-        onBlur={onBlur}
+        onClick={this.handleClick}
+        onMouseDown={this.handleMouseDown}
+        onMouseUp={this.handleMouseUp}
+        onBlur={this.handleBlur}
         onTransitionEnd={this.handleTransitionEndEvents}
       >
         {this.props.children}
@@ -110,6 +127,37 @@ export class Component extends React.Component<IProps, {}> {
     );
   }
 
+  handleClick = (ev: React.SyntheticEvent<HTMLButtonElement>): boolean => {
+    const { onClick } = this.props;
+
+    this.setState({
+      active: true,
+    });
+    onClick && onClick(ev);
+
+    return false;
+  }
+
+  handleMouseDown = (ev: React.SyntheticEvent<HTMLButtonElement>): boolean => {
+    this.setState({ animating: true });
+
+    return false;
+  }
+
+  handleMouseUp = (ev: React.SyntheticEvent<HTMLButtonElement>): boolean => {
+    this.setState({ animating: false });
+
+    return false;
+  }
+
+  handleBlur = (ev: React.SyntheticEvent<HTMLButtonElement>): boolean => {
+    const { onBlur } = this.props;
+
+    this.setState({ active: false });
+    onBlur && onBlur(ev);
+
+    return false;
+  }
   handleTransitionEndEvents = (ev: React.TransitionEvent<HTMLElement>): boolean => {
     ev.stopPropagation();
     ev.preventDefault();
