@@ -1666,7 +1666,7 @@
   dependencies:
     mkdirp "^1.0.4"
 
-"@prudencss/filters-svg@../filters-svg":
+"@prudencss/filters-svg@file:../filters-svg":
   version "0.0.1"
   dependencies:
     gulp "^4.0.2"
@@ -1675,7 +1675,7 @@
 "@prudencss/scss@../scss":
   version "0.2.1"
   dependencies:
-    "@prudencss/filters-svg" "../filters-svg"
+    "@prudencss/filters-svg" "file:../filters-svg"
     sass "^1.26.10"
 
 "@reach/router@^1.2.1", "@reach/router@^1.3.3":
@@ -14844,9 +14844,9 @@ typescript@^4.0.5:
   integrity sha512-ywmr/VrTVCmNTJ6iV2LwIrfG1P+lv6luD8sUJs+2eI9NLGigaN+nUQc13iHqisq7bra9lnmUSYqbJvegraBOPQ==
 
 ua-parser-js@^0.7.18:
-  version "0.7.22"
-  resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.22.tgz#960df60a5f911ea8f1c818f3747b99c6e177eae3"
-  integrity sha512-YUxzMjJ5T71w6a8WWVcMGM6YWOTX27rCoIQgLXiWaxqXSx9D7DNjiGWn1aJIRSQ5qr0xuhra77bSIh6voR/46Q==
+  version "0.7.35"
+  resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.35.tgz#8bda4827be4f0b1dda91699a29499575a1f1d307"
+  integrity sha512-veRf7dawaj9xaWEu9HoTVn5Pggtc/qj+kqTOFvNiN1l0YdxwC1kvel57UCjThjGa3BHBihE8/UJAHI+uQHmd/g==
 
 uglify-js@^3.1.4:
   version "3.11.5"
